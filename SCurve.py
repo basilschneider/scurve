@@ -31,13 +31,21 @@ class SCurve(object):
         """ Call a sequence of functions to get the S-curves. """
 
         LGR.info('Retrieve TGraphs from ROOT file.')
-        self._get_graphs()
+        self._retrieve_graphs()
         LGR.info('Create plot with original TGraphs.')
+        self._draw_save('scurve_diff')
+        self._toolbox_graph._integrate_graphs()
+        self._draw_save('scurve')
+
+    def _draw_save(self, name):
+
+        """ Draw and save TGraphs. """
+
         self._toolbox_graph.draw_graphs()
-        self.set_name('scurve_diff')
+        self.set_name(name)
         self._toolbox_graph.save()
 
-    def _get_graphs(self):
+    def _retrieve_graphs(self):
 
         """ Read data from ROOT file given in path. """
 
