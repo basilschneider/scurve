@@ -33,14 +33,16 @@ class SCurve(object):
         LGR.info('Retrieve TGraphs from ROOT file.')
         self._retrieve_graphs()
         LGR.info('Create plot with original TGraphs.')
-        self._draw_save('scurve_diff')
+        self._draw_save('S-curve_diff')
         self._toolbox_graph._integrate_graphs()
-        self._draw_save('scurve')
+        self._draw_save('S-curve')
 
     def _draw_save(self, name):
 
         """ Draw and save TGraphs. """
 
+        self._toolbox_graph.set_axis_title('THDAC')
+        self._toolbox_graph.set_title(name)
         self._toolbox_graph.draw_graphs()
         self.set_name(name)
         self._toolbox_graph.save()
