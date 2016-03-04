@@ -6,9 +6,20 @@ from SCurve import SCurve
 
 
 if __name__ == '__main__':
-    PRE1 = SCurve('../MAPSA_Software/plots01_nominal/backup_preCalibration__MPA2.root')
-    PRE1.set_graphs([1,2,3])
-    PRE1.set_directory('.')
-    PRE1.set_rootfile('output.root')
-    PRE1.set_name('output')
-    PRE1.make_s_curve()
+
+    for mpa in range(1, 2):
+        for prefix in ['pre', 'post']:
+
+            print 'Processing MPA {} {}'.format(mpa, prefix)
+
+            path = '../MAPSA_Software/plots01_nominal/'
+            scurve = SCurve('{}/backup_{}Calibration__MPA{}.root'
+                            .format(path, prefix, mpa))
+            scurve.set_graphs(range(0, 6))
+            output = 'output01_implementation'
+            name = '{}_{}'.format(mpa, prefix)
+
+            scurve.set_directory('{}/{}'.format(output, name))
+            scurve.set_rootfile('{}/{}.root'.format(output, name))
+
+            scurve.make_s_curve()

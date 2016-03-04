@@ -5,6 +5,7 @@ Author: Basil Schneider <basil.schneider@cern.ch>
 Take calibration measurement and integrate, to get S-curves.
 """
 
+from os import system
 from ROOT import TFile, TGraph  # pylint: disable=import-error
 from Logger import LGR
 from ToolboxTGraph import ToolboxTGraph
@@ -33,6 +34,7 @@ class SCurve(object):
         self._get_graphs()
         LGR.info('Create plot with original TGraphs.')
         self._toolbox_graph.draw_graphs()
+        self.set_name('scurve_diff')
         self._toolbox_graph.save()
 
     def _get_graphs(self):
@@ -65,7 +67,8 @@ class SCurve(object):
         # Make sure that graphs is a list
         check_if_object(graphs, list)
 
-        self._s_graphs = graphs
+        # Filter out all numbers outside 0 and 47
+        self._s_graphs = filter(lambda y: y in range(0, 48), graphs)
 
     def get_directory(self):
 
@@ -77,7 +80,7 @@ class SCurve(object):
 
         """ Set directory where plots and ROOT files are stored in. """
 
-        self._toolbox_graph.directory = s_dir
+        self._toolbox_graph.directory = s_dir.rstrip('/')
 
     def get_name(self):
 
