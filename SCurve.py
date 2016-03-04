@@ -34,7 +34,11 @@ class SCurve(object):
         self._retrieve_graphs()
         LGR.info('Create plot with original TGraphs.')
         self._draw_save('S-curve_diff')
-        self._toolbox_graph._integrate_graphs()
+        LGR.info('Integrate TGraphs to get S-curves.')
+        self._toolbox_graph.integrate_graphs()
+        self._draw_save('S-curve_unnormalized')
+        LGR.info('Normalize S-curves.')
+        self._toolbox_graph.normalize()
         self._draw_save('S-curve')
 
     def _draw_save(self, name):

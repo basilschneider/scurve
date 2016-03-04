@@ -7,16 +7,15 @@ from SCurve import SCurve
 
 if __name__ == '__main__':
 
-    for mpa in range(1, 2):
-        #for prefix in ['pre', 'post']:
-        for prefix in ['pre']:
+    for mpa in range(0, 6):
+        for prefix in ['pre', 'post']:
 
             print 'Processing MPA {} {}'.format(mpa, prefix)
 
             path = '../MAPSA_Software/plots01_nominal/'
             scurve = SCurve('{}/backup_{}Calibration__MPA{}.root'
                             .format(path, prefix, mpa))
-            scurve.set_graphs(range(0, 1))
+            scurve.set_graphs(range(0, 48))
             output = 'output01_implementation'
             name = '{}_{}'.format(mpa, prefix)
 
