@@ -22,4 +22,5 @@ if __name__ == '__main__':
             scurve.set_directory('{}/{}'.format(output, name))
             scurve.set_rootfile('{}/{}.root'.format(output, name))
 
+            scurve.retrieve_graphs()
             scurve.make_s_curve()

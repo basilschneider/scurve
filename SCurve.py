@@ -26,12 +26,27 @@ class SCurve(object):
         # List with all ToolboxTGraph objects
         self._toolbox_graph = ToolboxTGraph()
 
+    def retrieve_graphs(self):
+
+        """ Retrieve TGraphs. """
+
+        LGR.info('Retrieve TGraphs from ROOT file.')
+        # Open ROOT file
+        f_in = TFile(self._path, 'READ')
+
+        # Get TGraphs from ROOT file and fill list in ToolboxTGraph object
+        graphs = []
+        for s_graph in self._s_graphs:
+            graph = f_in.Get(str(s_graph))
+            check_if_object(graph, TGraph)
+            graphs.append(graph)
+
+        self._toolbox_graph.fill_graphs(graphs)
+
     def make_s_curve(self):
 
         """ Call a sequence of functions to get the S-curves. """
 
-        LGR.info('Retrieve TGraphs from ROOT file.')
-        self._retrieve_graphs()
         LGR.info('Create plot with original TGraphs.')
         self._draw_save('S-curve_diff')
         LGR.info('Integrate TGraphs to get S-curves.')
@@ -50,22 +65,6 @@ class SCurve(object):
         self._toolbox_graph.draw_graphs()
         self.set_name(name)
         self._toolbox_graph.save()
-
-    def _retrieve_graphs(self):
-
-        """ Read data from ROOT file given in path. """
-
-        # Open ROOT file
-        f_in = TFile(self._path, 'READ')
-
-        # Get TGraphs from ROOT file and fill list in ToolboxTGraph object
-        graphs = []
-        for s_graph in self._s_graphs:
-            graph = f_in.Get(str(s_graph))
-            check_if_object(graph, TGraph)
-            graphs.append(graph)
-
-        self._toolbox_graph.fill_graphs(graphs)
 
     def get_graphs(self):
 
