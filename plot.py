@@ -7,7 +7,7 @@ from SCurve import SCurve
 
 if __name__ == '__main__':
 
-    for mpa in range(0, 6):
+    for mpa in range(0, 1):
         for prefix in ['pre', 'post']:
 
             print 'Processing MPA {} {}'.format(mpa, prefix)
@@ -15,8 +15,8 @@ if __name__ == '__main__':
             path = '../MAPSA_Software/plots01_nominal/'
             scurve = SCurve('{}/backup_{}Calibration__MPA{}.root'
                             .format(path, prefix, mpa))
-            scurve.set_graphs(range(0, 48))
-            output = 'output01_implementation'
+            scurve.set_graphs(range(3, 4))
+            output = 'output02_change-structure'
             name = '{}_{}'.format(mpa, prefix)
 
             scurve.set_directory('{}/{}'.format(output, name))
@@ -24,3 +24,4 @@ if __name__ == '__main__':
 
             scurve.retrieve_graphs()
             scurve.make_s_curve()
+            scurve.make_gaussian_fit()

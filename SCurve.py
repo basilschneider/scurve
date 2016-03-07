@@ -43,28 +43,37 @@ class SCurve(object):
 
         self._toolbox_graph.fill_graphs(graphs)
 
+        LGR.info('Create plot with original TGraphs.')
+        self._draw_save('Gaussian', ['measurements'])
+
+    def make_gaussian_fit(self):
+
+        """ Fit a Gaussian distribution over the TGraph. """
+
+        LGR.info('Fit Gaussian on TGraph.')
+        self._toolbox_graph.fit('gaus', ['measurements'])
+        self._draw_save('Gaussian_fit', ['measurements'])
+
     def make_s_curve(self):
 
         """ Call a sequence of functions to get the S-curves. """
 
-        LGR.info('Create plot with original TGraphs.')
-        self._draw_save('S-curve_diff')
         LGR.info('Integrate TGraphs to get S-curves.')
-        self._toolbox_graph.integrate_graphs()
-        self._draw_save('S-curve_unnormalized')
+        self._toolbox_graph.integrate_graphs(['measurements'])
+        self._draw_save('S-curve_unnormalized', ['scurves'])
         LGR.info('Normalize S-curves.')
         self._toolbox_graph.normalize()
-        self._draw_save('S-curve')
+        self._draw_save('S-curve', ['scurves'])
 
-    def _draw_save(self, name):
+    def _draw_save(self, name, s_graphs):
 
         """ Draw and save TGraphs. """
 
-        self._toolbox_graph.set_axis_title('THDAC')
-        self._toolbox_graph.set_title(name)
-        self._toolbox_graph.draw_graphs()
+        self._toolbox_graph.set_axis_title('THDAC', s_graphs)
+        self._toolbox_graph.set_title(name, s_graphs)
+        self._toolbox_graph.draw_graphs(s_graphs)
         self.set_name(name)
-        self._toolbox_graph.save()
+        self._toolbox_graph.save(s_graphs)
 
     def get_graphs(self):
 
