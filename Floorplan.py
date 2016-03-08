@@ -76,13 +76,15 @@ class Floorplan(object):
 
         for fit in fits:
             try:
-                self._histogram.Fill(self._get_x(fit.get_numbering()),
-                                     self._get_y(fit.get_numbering()),
-                                     fit.get_mu())
+                _ = fit.get_numbering()
             except TypeError:
                 raise TypeError('Couldn\'t fill map for MPA number {}. Maybe '
                                 'the geometry is not defined for this MPA?'
                                 .format(fit.get_numbering()))
+
+            self._histogram.Fill(self._get_x(fit.get_numbering()),
+                                 self._get_y(fit.get_numbering()),
+                                 fit.get_mu())
 
         self._draw()
         self._save()

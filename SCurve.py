@@ -54,13 +54,18 @@ class SCurve(object):
         LGR.info('Create plot with original TGraphs.')
         self._draw_save('Gaussian', ['measurements'])
 
-    def make_maps(self):
+    def fit_gaussian(self):
 
-        """ Make 2d maps of MPA, showing fit characteristics. """
+        """ Fit Gaussian on TGraph. """
 
         LGR.info('Fit Gaussian on TGraph.')
         self._toolbox_graph.fit('gaus', ['measurements'])
         self._draw_save('Gaussian_fit', ['measurements'])
+
+    def make_maps(self):
+
+        """ Make 2d maps of MPA, showing fit characteristics. """
+
         LGR.info('Make 2d maps.')
         self.set_name('map')
         self._floorplan.set_geometry([range(32, 48),
@@ -97,13 +102,17 @@ class SCurve(object):
     def set_graphs(self, graphs):
 
         """ Set list of graphs to be drawn. This can be any combination of
-        numbers between 0 and 47. """
+        numbers between 0 and 47. Whenever this is done, the list of TGraphs is
+        reset. """
 
         # Make sure that graphs is a list
         check_if_object(graphs, list)
 
         # Filter out all numbers outside 0 and 47
         self._s_graphs = filter(lambda y: y in range(0, 48), graphs)
+
+        # Reset ToolboxTGraph
+        self._toolbox_graph.reset()
 
     def get_directory(self):
 
@@ -127,6 +136,13 @@ class SCurve(object):
     def set_name(self, s_name):
 
         """ Set name of output files. """
+
+        # Append number of MPA to name
+        if len(self._s_graphs) == 1:
+            s_name = '{}_{}'.format(s_name, self._s_graphs[0])
+        else:
+            s_name = '{}_{}-{}'.format(s_name, self._s_graphs[0],
+                                       self._s_graphs[-1])
 
         self._toolbox_graph.name = s_name
         self._floorplan.name = s_name
