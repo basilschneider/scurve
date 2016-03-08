@@ -10,12 +10,16 @@ from ROOT import TFile, TGraph  # pylint: disable=import-error
 from Logger import LGR
 from ToolboxTGraph import ToolboxTGraph
 from ToolboxHelper import check_if_object
+from Floorplan import Floorplan
 
 class SCurve(object):
 
     """ Take calibration measurement and integrate, to get S-curve. """
 
     def __init__(self, path):
+
+        """ Initialize class variables. """
+
         # Path to ROOT file
         self._path = path
 
@@ -25,6 +29,9 @@ class SCurve(object):
 
         # List with all ToolboxTGraph objects
         self._toolbox_graph = ToolboxTGraph()
+
+        # 2d maps object
+        self._floorplan = Floorplan()
 
     def retrieve_graphs(self):
 
@@ -42,17 +49,23 @@ class SCurve(object):
             graphs.append(graph)
 
         self._toolbox_graph.fill_graphs(graphs)
+        self._toolbox_graph.fill_numbering(self._s_graphs)
 
         LGR.info('Create plot with original TGraphs.')
         self._draw_save('Gaussian', ['measurements'])
 
-    def make_gaussian_fit(self):
+    def make_maps(self):
 
-        """ Fit a Gaussian distribution over the TGraph. """
+        """ Make 2d maps of MPA, showing fit characteristics. """
 
         LGR.info('Fit Gaussian on TGraph.')
         self._toolbox_graph.fit('gaus', ['measurements'])
         self._draw_save('Gaussian_fit', ['measurements'])
+        LGR.info('Make 2d maps.')
+        self.set_name('map')
+        self._floorplan.set_geometry([range(32, 48),
+                                      range(31, 15, -1), range(0, 16)])
+        self._floorplan.fill_map(self._toolbox_graph.get_fits())
 
     def make_s_curve(self):
 
@@ -103,6 +116,7 @@ class SCurve(object):
         """ Set directory where plots and ROOT files are stored in. """
 
         self._toolbox_graph.directory = s_dir.rstrip('/')
+        self._floorplan.directory = s_dir.rstrip('/')
 
     def get_name(self):
 
@@ -115,6 +129,7 @@ class SCurve(object):
         """ Set name of output files. """
 
         self._toolbox_graph.name = s_name
+        self._floorplan.name = s_name
 
     def get_rootfile(self):
 
@@ -132,3 +147,4 @@ class SCurve(object):
                    .format('/'.join(s_rootfile.split('/')[:-1])))
 
         self._toolbox_graph.s_rootfile = s_rootfile
+        self._floorplan.s_rootfile = s_rootfile
