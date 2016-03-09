@@ -70,7 +70,7 @@ class SCurve(object):
         self.set_name('map')
         self._floorplan.set_geometry([range(32, 48),
                                       range(31, 15, -1), range(0, 16)])
-        self._floorplan.fill_map(self._toolbox_graph.get_fits())
+        self._floorplan.fill_maps(self._toolbox_graph.get_fits())
 
     def make_s_curve(self):
 
