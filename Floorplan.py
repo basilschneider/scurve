@@ -155,22 +155,27 @@ class Floorplan(object):
         self._canvas.SaveAs('{}_c_err.pdf'.format(self.name))
         self._histogram_c_err.Write()
 
+        self._histogram_mu.GetZaxis().SetRangeUser(0, 255)
         self._histogram_mu.Draw('COLZ')
         self._canvas.SaveAs('{}_mu.pdf'.format(self.name))
         self._histogram_mu.Write()
 
+        self._histogram_mu_err.GetZaxis().SetRangeUser(0, 0.1)
         self._histogram_mu_err.Draw('COLZ')
         self._canvas.SaveAs('{}_mu_err.pdf'.format(self.name))
         self._histogram_mu_err.Write()
 
+        self._histogram_sigma.GetZaxis().SetRangeUser(0, 10)
         self._histogram_sigma.Draw('COLZ')
         self._canvas.SaveAs('{}_sigma.pdf'.format(self.name))
         self._histogram_sigma.Write()
 
+        self._histogram_sigma_err.GetZaxis().SetRangeUser(0, 0.1)
         self._histogram_sigma_err.Draw('COLZ')
         self._canvas.SaveAs('{}_sigma_err.pdf'.format(self.name))
         self._histogram_sigma_err.Write()
 
+        self._histogram_chi2.GetZaxis().SetRangeUser(0e6, 50e6)
         self._histogram_chi2.Draw('COLZ')
         self._canvas.SaveAs('{}_chi2.pdf'.format(self.name))
         self._histogram_chi2.Write()
