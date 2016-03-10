@@ -16,6 +16,9 @@ class SCurve(object):
 
     """ Take calibration measurement and integrate, to get S-curve. """
 
+    # 2d maps object
+    _floorplan = Floorplan()
+
     def __init__(self, path):
 
         """ Initialize class variables. """
@@ -29,9 +32,6 @@ class SCurve(object):
 
         # List with all ToolboxTGraph objects
         self._toolbox_graph = ToolboxTGraph()
-
-        # 2d maps object
-        self._floorplan = Floorplan()
 
     def retrieve_graphs(self):
 
@@ -62,7 +62,7 @@ class SCurve(object):
         self._toolbox_graph.fit('gaus', ['measurements'])
         self._draw_save('Gaussian_fit', ['measurements'])
 
-    def make_maps(self):
+    def make_maps(self, coordinate, prefix):
 
         """ Make 2d maps of MPA, showing fit characteristics. """
 
@@ -70,7 +70,8 @@ class SCurve(object):
         self.set_name('map')
         self._floorplan.set_geometry([range(32, 48),
                                       range(31, 15, -1), range(0, 16)])
-        self._floorplan.fill_maps(self._toolbox_graph.get_fits())
+        self._floorplan.fill_maps(self._toolbox_graph.get_fits(), coordinate,
+                                  prefix)
 
     def make_s_curve(self):
 
