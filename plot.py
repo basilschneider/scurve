@@ -15,7 +15,7 @@ if __name__ == '__main__':
             path = '../MAPSA_Software/plots01_nominal/'
             scurve = SCurve('{}/backup_{}Calibration__MPA{}.root'
                             .format(path, prefix, mpa))
-            output = 'output08_full-map'
+            output = 'output09_cosmetics'
             name = '{}_{}'.format(mpa, prefix)
 
             scurve.set_directory('{}/{}'.format(output, name))

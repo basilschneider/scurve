@@ -6,7 +6,7 @@ Make 2d maps of MPA, showing various fit characteristics.
 """
 
 from os import makedirs, getcwd, path, chdir
-from ROOT import TH2F, TFile, TCanvas, gStyle
+from ROOT import TH2F, TFile, TCanvas, gStyle, gPad
 from Logger import LGR
 
 class Floorplan(object):
@@ -170,6 +170,8 @@ class Floorplan(object):
         if self.directory:
             self._chdir(self.directory, rootfile)
 
+        self._cosmetics()
+
         self._canvas.cd()
         self._histogram_c[-1].Draw('COLZ')
         self._canvas.SaveAs('{}_c.pdf'.format(self.name))
@@ -298,3 +300,30 @@ class Floorplan(object):
             return 6
         else:
             return -1
+
+    def _cosmetics(self):
+
+        """ Do cosmetics on 2d maps. """
+
+        # Set 16 ticks on x axis and 3 ticks on y axis
+        self._histogram_c[-1].GetXaxis().SetNdivisions(16, 0, 0)
+        self._histogram_c[-1].GetYaxis().SetNdivisions(3, 0, 0)
+        self._histogram_c_err[-1].GetXaxis().SetNdivisions(16, 0, 0)
+        self._histogram_c_err[-1].GetYaxis().SetNdivisions(3, 0, 0)
+        self._histogram_mu[-1].GetXaxis().SetNdivisions(16, 0, 0)
+        self._histogram_mu[-1].GetYaxis().SetNdivisions(3, 0, 0)
+        self._histogram_mu_err[-1].GetXaxis().SetNdivisions(16, 0, 0)
+        self._histogram_mu_err[-1].GetYaxis().SetNdivisions(3, 0, 0)
+        self._histogram_sigma[-1].GetXaxis().SetNdivisions(16, 0, 0)
+        self._histogram_sigma[-1].GetYaxis().SetNdivisions(3, 0, 0)
+        self._histogram_sigma_err[-1].GetXaxis().SetNdivisions(16, 0, 0)
+        self._histogram_sigma_err[-1].GetYaxis().SetNdivisions(3, 0, 0)
+        self._histogram_chi2[-1].GetXaxis().SetNdivisions(16, 0, 0)
+        self._histogram_chi2[-1].GetYaxis().SetNdivisions(3, 0, 0)
+        self._histogram_ndf[-1].GetXaxis().SetNdivisions(16, 0, 0)
+        self._histogram_ndf[-1].GetYaxis().SetNdivisions(3, 0, 0)
+
+        # Make ticks cross whole grid
+        #self._histogram_sigma[-1].GetXaxis().SetTickLength(1.)
+        #self._histogram_sigma[-1].GetYaxis().SetTickLength(1.)
+
