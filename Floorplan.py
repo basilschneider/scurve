@@ -50,7 +50,7 @@ class Floorplan(object):
             self._map_chi2[idx].Divide(3, 2)
             self._map_ndf[idx].Divide(3, 2)
 
-    def set_geometry(self, geometry):
+    def set_geometry(self, geometry, prefix):
 
         """ Defines geometry, i.e. the following list is interpreted as a
         geometry:
@@ -73,22 +73,42 @@ class Floorplan(object):
         # Get number of bins in y
         self._bins_y = len(geometry)
 
-        self._histogram_c.append(TH2F('c', 'Constant', self._bins_x, 0, self._bins_x,
-                                 self._bins_y, 0, self._bins_y))
-        self._histogram_c_err.append(TH2F('c_err', 'Error on constant', self._bins_x, 0, self._bins_x,
-                                     self._bins_y, 0, self._bins_y))
-        self._histogram_mu.append(TH2F('mu', 'Mean', self._bins_x, 0, self._bins_x,
-                                  self._bins_y, 0, self._bins_y))
-        self._histogram_mu_err.append(TH2F('mu_err', 'Error on mean', self._bins_x, 0, self._bins_x,
+        # Create histograms
+        if prefix == 0:
+            prefix_str = 'pre'
+        else:
+            prefix_str = 'post'
+
+        self._histogram_c.append(TH2F('c', 'Constant ({})'.format(prefix_str),
+                                      self._bins_x, 0, self._bins_x,
                                       self._bins_y, 0, self._bins_y))
-        self._histogram_sigma.append(TH2F('sigma', '#sigma', self._bins_x, 0, self._bins_x,
-                                     self._bins_y, 0, self._bins_y))
-        self._histogram_sigma_err.append(TH2F('sigma_err', 'Error on #sigma', self._bins_x, 0, self._bins_x,
+        self._histogram_c_err.append(TH2F('c_err', 'Error on constant ({})'
+                                          .format(prefix_str),
+                                          self._bins_x, 0, self._bins_x,
+                                          self._bins_y, 0, self._bins_y))
+        self._histogram_mu.append(TH2F('mu', 'Mean ({})'.format(prefix_str),
+                                       self._bins_x, 0, self._bins_x,
+                                       self._bins_y, 0, self._bins_y))
+        self._histogram_mu_err.append(TH2F('mu_err', 'Error on mean ({})'
+                                           .format(prefix_str),
+                                           self._bins_x, 0, self._bins_x,
+                                           self._bins_y, 0, self._bins_y))
+        self._histogram_sigma.append(TH2F('sigma', '#sigma ({})'
+                                          .format(prefix_str),
+                                          self._bins_x, 0, self._bins_x,
+                                          self._bins_y, 0, self._bins_y))
+        self._histogram_sigma_err.append(TH2F('sigma_err',
+                                              'Error on #sigma ({})'
+                                              .format(prefix_str),
+                                              self._bins_x, 0, self._bins_x,
+                                              self._bins_y, 0, self._bins_y))
+        self._histogram_chi2.append(TH2F('chi2', '#chi^{{2}} ({})'
+                                         .format(prefix_str),
+                                         self._bins_x, 0, self._bins_x,
                                          self._bins_y, 0, self._bins_y))
-        self._histogram_chi2.append(TH2F('chi2', '#chi^{2}', self._bins_x, 0, self._bins_x,
-                                    self._bins_y, 0, self._bins_y))
-        self._histogram_ndf.append(TH2F('ndf', 'NDF', self._bins_x, 0, self._bins_x,
-                                   self._bins_y, 0, self._bins_y))
+        self._histogram_ndf.append(TH2F('ndf', 'NDF ({})'.format(prefix_str),
+                                        self._bins_x, 0, self._bins_x,
+                                        self._bins_y, 0, self._bins_y))
 
     def _get_x(self, numbering):
 

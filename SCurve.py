@@ -72,7 +72,7 @@ class SCurve(object):
             geometry = [range(32, 48), range(31, 15, -1), range(0, 16)]
         else:
             geometry = [range(15, -1, -1), range(16, 32), range(47, 31, -1)]
-        self._floorplan.set_geometry(geometry)
+        self._floorplan.set_geometry(geometry, prefix)
         self._floorplan.fill_maps(self._toolbox_graph.get_fits(), coordinate,
                                   prefix)
 
