@@ -68,8 +68,11 @@ class SCurve(object):
 
         LGR.info('Make 2d maps.')
         self.set_name('map')
-        self._floorplan.set_geometry([range(32, 48),
-                                      range(31, 15, -1), range(0, 16)])
+        if coordinate in [0, 1, 2]:
+            geometry = [range(32, 48), range(31, 15, -1), range(0, 16)]
+        else:
+            geometry = [range(15, -1, -1), range(16, 32), range(47, 31, -1)]
+        self._floorplan.set_geometry(geometry)
         self._floorplan.fill_maps(self._toolbox_graph.get_fits(), coordinate,
                                   prefix)
 

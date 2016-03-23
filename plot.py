@@ -12,10 +12,10 @@ if __name__ == '__main__':
 
             print 'Processing MPA {} {}'.format(mpa, prefix)
 
-            path = '../MAPSA_Software/plots01_nominal/'
+            path = '../MAPSA_Software/plots03_HV90/'
             scurve = SCurve('{}/backup_{}Calibration__MPA{}.root'
                             .format(path, prefix, mpa))
-            output = 'output09_cosmetics'
+            output = 'output15_debug'
             name = '{}_{}'.format(mpa, prefix)
 
             scurve.set_directory('{}/{}'.format(output, name))
@@ -30,7 +30,11 @@ if __name__ == '__main__':
                 scurve.fit_gaussian()
 
             # All pixels together
-            scurve.set_graphs(range(0, pixels))
+            #l = range(1, 15)
+            #l.extend(range(17, 31))
+            #l.extend(range(33, 47))
+            l = range(0, pixels)
+            scurve.set_graphs(l)
             scurve.retrieve_graphs()
             scurve.make_s_curve()
             scurve.fit_gaussian()

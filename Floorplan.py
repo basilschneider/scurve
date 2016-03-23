@@ -41,14 +41,14 @@ class Floorplan(object):
         self._map_chi2 = [TCanvas(), TCanvas()]
         self._map_ndf = [TCanvas(), TCanvas()]
         for idx in range(0, 2):
-            self._map_c[idx].Divide(2, 3)
-            self._map_c_err[idx].Divide(2, 3)
-            self._map_mu[idx].Divide(2, 3)
-            self._map_mu_err[idx].Divide(2, 3)
-            self._map_sigma[idx].Divide(2, 3)
-            self._map_sigma_err[idx].Divide(2, 3)
-            self._map_chi2[idx].Divide(2, 3)
-            self._map_ndf[idx].Divide(2, 3)
+            self._map_c[idx].Divide(3, 2)
+            self._map_c_err[idx].Divide(3, 2)
+            self._map_mu[idx].Divide(3, 2)
+            self._map_mu_err[idx].Divide(3, 2)
+            self._map_sigma[idx].Divide(3, 2)
+            self._map_sigma_err[idx].Divide(3, 2)
+            self._map_chi2[idx].Divide(3, 2)
+            self._map_ndf[idx].Divide(3, 2)
 
     def set_geometry(self, geometry):
 
@@ -187,7 +187,7 @@ class Floorplan(object):
         self._histogram_c_err[-1].Draw('COLZ')
 
         self._canvas.cd()
-        self._histogram_mu[-1].GetZaxis().SetRangeUser(0, 255)
+        self._histogram_mu[-1].GetZaxis().SetRangeUser(30, 170)
         self._histogram_mu[-1].Draw('COLZ')
         self._canvas.SaveAs('{}_mu.pdf'.format(self.name))
         self._histogram_mu[-1].Write()
@@ -203,7 +203,7 @@ class Floorplan(object):
         self._histogram_mu_err[-1].Draw('COLZ')
 
         self._canvas.cd()
-        self._histogram_sigma[-1].GetZaxis().SetRangeUser(0, 10)
+        self._histogram_sigma[-1].GetZaxis().SetRangeUser(1, 7)
         self._histogram_sigma[-1].Draw('COLZ')
         self._canvas.SaveAs('{}_sigma.pdf'.format(self.name))
         self._histogram_sigma[-1].Write()
@@ -289,15 +289,15 @@ class Floorplan(object):
         if coordinate == 0:
             return 1
         if coordinate == 1:
-            return 4
-        if coordinate == 2:
             return 2
-        if coordinate == 3:
-            return 5
-        if coordinate == 4:
+        if coordinate == 2:
             return 3
-        if coordinate == 5:
+        if coordinate == 3:
             return 6
+        if coordinate == 4:
+            return 5
+        if coordinate == 5:
+            return 4
         else:
             return -1
 
