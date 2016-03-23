@@ -193,6 +193,7 @@ class Floorplan(object):
         self._cosmetics()
 
         self._canvas.cd()
+        self._histogram_c[-1].GetZaxis().SetRangeUser(6000, 10000)
         self._histogram_c[-1].Draw('COLZ')
         self._canvas.SaveAs('{}_c.pdf'.format(self.name))
         self._histogram_c[-1].Write()
@@ -200,6 +201,7 @@ class Floorplan(object):
         self._histogram_c[-1].Draw('COLZ')
 
         self._canvas.cd()
+        self._histogram_c_err[-1].GetZaxis().SetRangeUser(0, 300)
         self._histogram_c_err[-1].Draw('COLZ')
         self._canvas.SaveAs('{}_c_err.pdf'.format(self.name))
         self._histogram_c_err[-1].Write()
