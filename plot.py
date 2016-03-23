@@ -12,10 +12,10 @@ if __name__ == '__main__':
 
             print 'Processing MPA {} {}'.format(mpa, prefix)
 
-            path = '../MAPSA_Software/plots03_HV90/'
+            path = '../MAPSA_Software/plots10_turn-off-one-pixel/'
             scurve = SCurve('{}/backup_{}Calibration__MPA{}.root'
                             .format(path, prefix, mpa))
-            output = 'output15_debug'
+            output = 'output21_debug'
             name = '{}_{}'.format(mpa, prefix)
 
             scurve.set_directory('{}/{}'.format(output, name))

@@ -92,7 +92,7 @@ class SCurve(object):
         """ Draw and save TGraphs. """
 
         self._toolbox_graph.set_axis_title('THDAC', s_graphs)
-        self._toolbox_graph.set_title(name, s_graphs)
+        self._toolbox_graph.set_title(self._get_title(name), s_graphs)
         self._toolbox_graph.draw_graphs(s_graphs)
         self.set_name(name)
         self._toolbox_graph.save(s_graphs)
@@ -150,6 +150,20 @@ class SCurve(object):
 
         self._toolbox_graph.name = s_name
         self._floorplan.name = s_name
+
+    def _get_title(self, s_name):
+
+        """ Get title for TGraph(s). """
+
+        # Append number of MPA to name
+        if len(self._s_graphs) == 1:
+            s_title = '{} (pixel {})'.format(s_name, self._s_graphs[0])
+        else:
+            s_title = '{} (pixels {}-{})'.format(s_name, self._s_graphs[0],
+                                       self._s_graphs[-1])
+
+        return s_title
+
 
     def get_rootfile(self):
 
