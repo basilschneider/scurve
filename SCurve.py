@@ -143,9 +143,9 @@ class SCurve(object):
 
         # Append number of MPA to name
         if len(self._s_graphs) == 1:
-            s_name = '{}_{}'.format(s_name, self._s_graphs[0])
+            s_name = '{0}_{1}'.format(s_name, self._s_graphs[0])
         else:
-            s_name = '{}_{}-{}'.format(s_name, self._s_graphs[0],
+            s_name = '{0}_{1}-{2}'.format(s_name, self._s_graphs[0],
                                        self._s_graphs[-1])
 
         self._toolbox_graph.name = s_name
@@ -157,9 +157,9 @@ class SCurve(object):
 
         # Append number of MPA to name
         if len(self._s_graphs) == 1:
-            s_title = '{} (pixel {})'.format(s_name, self._s_graphs[0])
+            s_title = '{0} (pixel {1})'.format(s_name, self._s_graphs[0])
         else:
-            s_title = '{} (pixels {}-{})'.format(s_name, self._s_graphs[0],
+            s_title = '{0} (pixels {1}-{2})'.format(s_name, self._s_graphs[0],
                                        self._s_graphs[-1])
 
         return s_title
@@ -177,7 +177,7 @@ class SCurve(object):
 
         # If rootfile is located in a subdirectory, create directory first
         if '/' in s_rootfile:
-            system('mkdir -p {}'
+            system('mkdir -p {0}'
                    .format('/'.join(s_rootfile.split('/')[:-1])))
 
         self._toolbox_graph.s_rootfile = s_rootfile

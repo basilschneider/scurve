@@ -73,7 +73,7 @@ class ToolboxTGraph(object):
         self._canvas.cd()
         same = ''
         for idx, graph in enumerate(graphs):
-            #graph.Draw('AC* {}'.format(same))
+            #graph.Draw('AC* {0}'.format(same))
             graph.Draw(same)
             same = 'SAME'
 
@@ -260,7 +260,7 @@ class ToolboxTGraph(object):
                 makedirs(self.directory)
             chdir(self.directory)
 
-        self._canvas.SaveAs('{}.pdf'.format(self.name))
+        self._canvas.SaveAs('{0}.pdf'.format(self.name))
         for graph in graphs:
             graph.Write()
 

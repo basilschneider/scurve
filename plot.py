@@ -13,16 +13,16 @@ if __name__ == '__main__':
     for mpa in range(0, 6):
         for idx, prefix in enumerate(['pre', 'post']):
 
-            print 'Processing MPA {} {}'.format(mpa, prefix)
+            print 'Processing MPA {0} {1}'.format(mpa, prefix)
 
-            path = '../MAPSA_Software/plots19_cable_rutgers'
-            scurve = SCurve('{}/backup_{}Calibration__MPA{}.root'
+            path = '../../MAPSA_Software/plots19_cable_rutgers'
+            scurve = SCurve('{0}/backup_{1}Calibration__MPA{2}.root'
                             .format(path, prefix, mpa))
             output = 'output27_cable_rutgers_03'
-            name = '{}_{}'.format(mpa, prefix)
+            name = '{0}_{1}'.format(mpa, prefix)
 
-            scurve.set_directory('{}/{}'.format(output, name))
-            scurve.set_rootfile('{}/out.root'.format(output, name))
+            scurve.set_directory('{0}/{1}'.format(output, name))
+            scurve.set_rootfile('{0}/out.root'.format(output, name))
 
             pixels = 48
             # All individual pixels

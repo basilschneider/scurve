@@ -79,34 +79,34 @@ class Floorplan(object):
         else:
             prefix_str = 'post'
 
-        self._histogram_c.append(TH2F('c', 'Constant ({})'.format(prefix_str),
+        self._histogram_c.append(TH2F('c', 'Constant ({0})'.format(prefix_str),
                                       self._bins_x, 0, self._bins_x,
                                       self._bins_y, 0, self._bins_y))
-        self._histogram_c_err.append(TH2F('c_err', 'Error on constant ({})'
+        self._histogram_c_err.append(TH2F('c_err', 'Error on constant ({0})'
                                           .format(prefix_str),
                                           self._bins_x, 0, self._bins_x,
                                           self._bins_y, 0, self._bins_y))
-        self._histogram_mu.append(TH2F('mu', 'Mean ({})'.format(prefix_str),
+        self._histogram_mu.append(TH2F('mu', 'Mean ({0})'.format(prefix_str),
                                        self._bins_x, 0, self._bins_x,
                                        self._bins_y, 0, self._bins_y))
-        self._histogram_mu_err.append(TH2F('mu_err', 'Error on mean ({})'
+        self._histogram_mu_err.append(TH2F('mu_err', 'Error on mean ({0})'
                                            .format(prefix_str),
                                            self._bins_x, 0, self._bins_x,
                                            self._bins_y, 0, self._bins_y))
-        self._histogram_sigma.append(TH2F('sigma', '#sigma ({})'
+        self._histogram_sigma.append(TH2F('sigma', '#sigma ({0})'
                                           .format(prefix_str),
                                           self._bins_x, 0, self._bins_x,
                                           self._bins_y, 0, self._bins_y))
         self._histogram_sigma_err.append(TH2F('sigma_err',
-                                              'Error on #sigma ({})'
+                                              'Error on #sigma ({0})'
                                               .format(prefix_str),
                                               self._bins_x, 0, self._bins_x,
                                               self._bins_y, 0, self._bins_y))
-        self._histogram_chi2.append(TH2F('chi2', '#chi^{{2}} ({})'
+        self._histogram_chi2.append(TH2F('chi2', '#chi^{{2}} ({0})'
                                          .format(prefix_str),
                                          self._bins_x, 0, self._bins_x,
                                          self._bins_y, 0, self._bins_y))
-        self._histogram_ndf.append(TH2F('ndf', 'NDF ({})'.format(prefix_str),
+        self._histogram_ndf.append(TH2F('ndf', 'NDF ({0})'.format(prefix_str),
                                         self._bins_x, 0, self._bins_x,
                                         self._bins_y, 0, self._bins_y))
 
@@ -136,7 +136,7 @@ class Floorplan(object):
             try:
                 numbering = fit.get_numbering()
             except TypeError:
-                raise TypeError('Couldn\'t fill map for MPA number {}. Maybe '
+                raise TypeError('Couldn\'t fill map for MPA number {0}. Maybe '
                                 'the geometry is not defined for this MPA?'
                                 .format(fit.get_numbering()))
 
@@ -195,7 +195,7 @@ class Floorplan(object):
         self._canvas.cd()
         #self._histogram_c[-1].GetZaxis().SetRangeUser(6000, 10000)
         self._histogram_c[-1].Draw('COLZ')
-        self._canvas.SaveAs('{}_c.pdf'.format(self.name))
+        self._canvas.SaveAs('{0}_c.pdf'.format(self.name))
         self._histogram_c[-1].Write()
         self._map_c[prefix].cd(self._get_mpa_coordinate(coordinate))
         self._histogram_c[-1].Draw('COLZ')
@@ -203,7 +203,7 @@ class Floorplan(object):
         self._canvas.cd()
         #self._histogram_c_err[-1].GetZaxis().SetRangeUser(0, 300)
         self._histogram_c_err[-1].Draw('COLZ')
-        self._canvas.SaveAs('{}_c_err.pdf'.format(self.name))
+        self._canvas.SaveAs('{0}_c_err.pdf'.format(self.name))
         self._histogram_c_err[-1].Write()
         self._map_c_err[prefix].cd(self._get_mpa_coordinate(coordinate))
         self._histogram_c_err[-1].Draw('COLZ')
@@ -211,7 +211,7 @@ class Floorplan(object):
         self._canvas.cd()
         self._histogram_mu[-1].GetZaxis().SetRangeUser(30, 170)
         self._histogram_mu[-1].Draw('COLZ')
-        self._canvas.SaveAs('{}_mu.pdf'.format(self.name))
+        self._canvas.SaveAs('{0}_mu.pdf'.format(self.name))
         self._histogram_mu[-1].Write()
         self._map_mu[prefix].cd(self._get_mpa_coordinate(coordinate))
         self._histogram_mu[-1].Draw('COLZ')
@@ -219,7 +219,7 @@ class Floorplan(object):
         self._canvas.cd()
         self._histogram_mu_err[-1].GetZaxis().SetRangeUser(0, 0.1)
         self._histogram_mu_err[-1].Draw('COLZ')
-        self._canvas.SaveAs('{}_mu_err.pdf'.format(self.name))
+        self._canvas.SaveAs('{0}_mu_err.pdf'.format(self.name))
         self._histogram_mu_err[-1].Write()
         self._map_mu_err[prefix].cd(self._get_mpa_coordinate(coordinate))
         self._histogram_mu_err[-1].Draw('COLZ')
@@ -227,7 +227,7 @@ class Floorplan(object):
         self._canvas.cd()
         self._histogram_sigma[-1].GetZaxis().SetRangeUser(1, 7)
         self._histogram_sigma[-1].Draw('COLZ')
-        self._canvas.SaveAs('{}_sigma.pdf'.format(self.name))
+        self._canvas.SaveAs('{0}_sigma.pdf'.format(self.name))
         self._histogram_sigma[-1].Write()
         self._map_sigma[prefix].cd(self._get_mpa_coordinate(coordinate))
         self._histogram_sigma[-1].Draw('COLZ')
@@ -235,7 +235,7 @@ class Floorplan(object):
         self._canvas.cd()
         self._histogram_sigma_err[-1].GetZaxis().SetRangeUser(0, 0.1)
         self._histogram_sigma_err[-1].Draw('COLZ')
-        self._canvas.SaveAs('{}_sigma_err.pdf'.format(self.name))
+        self._canvas.SaveAs('{0}_sigma_err.pdf'.format(self.name))
         self._histogram_sigma_err[-1].Write()
         self._map_sigma_err[prefix].cd(self._get_mpa_coordinate(coordinate))
         self._histogram_sigma_err[-1].Draw('COLZ')
@@ -243,14 +243,14 @@ class Floorplan(object):
         self._canvas.cd()
         self._histogram_chi2[-1].GetZaxis().SetRangeUser(0e6, 50e6)
         self._histogram_chi2[-1].Draw('COLZ')
-        self._canvas.SaveAs('{}_chi2.pdf'.format(self.name))
+        self._canvas.SaveAs('{0}_chi2.pdf'.format(self.name))
         self._histogram_chi2[-1].Write()
         self._map_chi2[prefix].cd(self._get_mpa_coordinate(coordinate))
         self._histogram_chi2[-1].Draw('COLZ')
 
         self._canvas.cd()
         self._histogram_ndf[-1].Draw('COLZ')
-        self._canvas.SaveAs('{}_ndf.pdf'.format(self.name))
+        self._canvas.SaveAs('{0}_ndf.pdf'.format(self.name))
         self._histogram_ndf[-1].Write()
         self._map_ndf[prefix].cd(self._get_mpa_coordinate(coordinate))
         self._histogram_ndf[-1].Draw('COLZ')
@@ -263,7 +263,7 @@ class Floorplan(object):
         # Save complete map when coordinate is 5;
         # this is not completely sane, but good enough
         if coordinate == 5:
-            self._chdir('{}/all'
+            self._chdir('{0}/all'
                         .format('/'.join(self.directory.split('/')[:-1])),
                         rootfile)
             for idx in range(0, 2):
@@ -272,28 +272,28 @@ class Floorplan(object):
                 else:
                     prefix = 'post'
                 self._map_c[idx].Write()
-                self._map_c[idx].SaveAs('{}_all_{}_c.pdf'
+                self._map_c[idx].SaveAs('{0}_all_{1}_c.pdf'
                                         .format(self.name, prefix))
                 self._map_c_err[idx].Write()
-                self._map_c_err[idx].SaveAs('{}_all_{}_c_err.pdf'
+                self._map_c_err[idx].SaveAs('{0}_all_{1}_c_err.pdf'
                                             .format(self.name, prefix))
                 self._map_mu[idx].Write()
-                self._map_mu[idx].SaveAs('{}_all_{}_mu.pdf'
+                self._map_mu[idx].SaveAs('{0}_all_{1}_mu.pdf'
                                          .format(self.name, prefix))
                 self._map_mu_err[idx].Write()
-                self._map_mu_err[idx].SaveAs('{}_all_{}_mu_err.pdf'
+                self._map_mu_err[idx].SaveAs('{0}_all_{1}_mu_err.pdf'
                                              .format(self.name, prefix))
                 self._map_sigma[idx].Write()
-                self._map_sigma[idx].SaveAs('{}_all_{}_sigma.pdf'
+                self._map_sigma[idx].SaveAs('{0}_all_{1}_sigma.pdf'
                                             .format(self.name, prefix))
                 self._map_sigma_err[idx].Write()
-                self._map_sigma_err[idx].SaveAs('{}_all_{}_sigma_err.pdf'
+                self._map_sigma_err[idx].SaveAs('{0}_all_{1}_sigma_err.pdf'
                                                 .format(self.name, prefix))
                 self._map_chi2[idx].Write()
-                self._map_chi2[idx].SaveAs('{}_all_{}_chi2.pdf'
+                self._map_chi2[idx].SaveAs('{0}_all_{1}_chi2.pdf'
                                            .format(self.name, prefix))
                 self._map_ndf[idx].Write()
-                self._map_ndf[idx].SaveAs('{}_all_{}_ndf.pdf'
+                self._map_ndf[idx].SaveAs('{0}_all_{1}_ndf.pdf'
                                           .format(self.name, prefix))
 
             # Go back to original working directories

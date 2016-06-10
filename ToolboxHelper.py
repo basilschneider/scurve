@@ -18,12 +18,12 @@ def check_if_list(lst, length_min=-1, length_max=-1):
     check_if_object(lst, list)
     # Check for the minimum length of the list
     if length_min > -1 and len(lst) < length_min:
-        raise TypeError('The argument {} does not meet the minimum length '
-                        'requirement of {}.'.format(lst, length_min))
+        raise TypeError('The argument {0} does not meet the minimum length '
+                        'requirement of {1}.'.format(lst, length_min))
     # Check for the maximum length of the list
     if length_max > -1 and len(lst) > length_max:
-        raise TypeError('The argument {} does not meet the maximum length '
-                        'requirement of {}.'.format(lst, length_max))
+        raise TypeError('The argument {0} does not meet the maximum length '
+                        'requirement of {1}.'.format(lst, length_max))
     return True
 
 
@@ -37,7 +37,7 @@ def check_if_file_exists(path_file):
                  'presence. Further errors might be due to non-'
                  'existing file.')
     elif not isfile(path_file):
-        raise IOError('The file {} does not exist.'.format(path_file))
+        raise IOError('The file {0} does not exist.'.format(path_file))
     return True
 
 
@@ -48,7 +48,7 @@ def check_if_tree_exists(path_file, path_tree):
     file_in = TFile(path_file)
     # pyROOT does not allow try/except, so make it in a non pythonic way
     if not file_in.Get(path_tree):
-        raise ValueError('TTree {} does not exist in {}.'
+        raise ValueError('TTree {0} does not exist in {1}.'
                          .format(path_tree, path_file))
     del file_in
 
@@ -58,7 +58,7 @@ def check_if_object(obj, obj_type):
     """ Check if obj is of type obj_type. """
 
     if not isinstance(obj, obj_type):
-        raise TypeError('The object {} is not of type {}.'
+        raise TypeError('The object {0} is not of type {1}.'
                         .format(obj, obj_type.__name__))
     return True
 
