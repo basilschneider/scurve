@@ -3,9 +3,12 @@
 """ Plot TGraphs from measurement before and after integrating. """
 
 from SCurve import SCurve
+from ROOT import gROOT
 
 
 if __name__ == '__main__':
+
+    gROOT.SetBatch(True)
 
     for mpa in range(0, 6):
         for idx, prefix in enumerate(['pre', 'post']):
