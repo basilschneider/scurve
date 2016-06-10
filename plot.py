@@ -26,7 +26,7 @@ if __name__ == '__main__':
 
             pixels = 48
             # All individual pixels
-            for pixel in range(0, pixels):
+            for pixel in range(0, 6):
                 scurve.set_graphs([pixel])
                 scurve.retrieve_graphs()
                 scurve.make_s_curve()
