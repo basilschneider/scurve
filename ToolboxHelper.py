@@ -5,8 +5,10 @@
 from os.path import isfile
 from inspect import getsourcelines
 from collections import defaultdict
-from ROOT import TFile  # pylint: disable=import-error
+from ROOT import TFile, gROOT  # pylint: disable=import-error
 from Logger import LGR
+
+gROOT.SetBatch(True)
 
 
 def check_if_list(lst, length_min=-1, length_max=-1):

@@ -7,6 +7,7 @@ Data class to store Gaussian fit values.
 
 from Logger import LGR
 
+
 class ToolboxFit(object):
 
     """ Data class to store Gaussian fit values. """

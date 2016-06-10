@@ -6,8 +6,10 @@ Make 2d maps of MPA, showing various fit characteristics.
 """
 
 from os import makedirs, getcwd, path, chdir
-from ROOT import TH2F, TFile, TCanvas, gStyle, gPad
+from ROOT import TH2F, TFile, TCanvas, gStyle, gPad, gROOT
 from Logger import LGR
+
+gROOT.SetBatch(True)
 
 class Floorplan(object):
 

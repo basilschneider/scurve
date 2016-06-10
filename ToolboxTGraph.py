@@ -5,10 +5,12 @@
 from os import makedirs, chdir, getcwd, path
 from array import array
 from ROOT import TFile, TGraph, TCanvas, TLegend  # pylint: disable=import-error
-from ROOT import Double, gStyle
+from ROOT import Double, gStyle, gROOT
 from Logger import LGR
 from ToolboxFit import ToolboxFit
 from ToolboxHelper import check_if_object, safe_divide
+
+gROOT.SetBatch(True)
 
 class ToolboxTGraph(object):
 

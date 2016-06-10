@@ -6,11 +6,13 @@ Take calibration measurement and integrate, to get S-curves.
 """
 
 from os import system
-from ROOT import TFile, TGraph  # pylint: disable=import-error
+from ROOT import TFile, TGraph, gROOT  # pylint: disable=import-error
 from Logger import LGR
 from ToolboxTGraph import ToolboxTGraph
 from ToolboxHelper import check_if_object
 from Floorplan import Floorplan
+
+gROOT.SetBatch(True)
 
 class SCurve(object):
 

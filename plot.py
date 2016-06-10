@@ -5,10 +5,10 @@
 from SCurve import SCurve
 from ROOT import gROOT
 
+gROOT.SetBatch(True)
 
 if __name__ == '__main__':
 
-    gROOT.SetBatch(True)
 
     for mpa in range(0, 6):
         for idx, prefix in enumerate(['pre', 'post']):
