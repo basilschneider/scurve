@@ -18,6 +18,8 @@ class SCurve(object):
 
     """ Take calibration measurement and integrate, to get S-curve. """
 
+    gROOT.SetBatch(True)
+
     # 2d maps object
     _floorplan = Floorplan()
 

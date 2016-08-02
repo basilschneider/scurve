@@ -15,11 +15,11 @@ if __name__ == '__main__':
 
             print 'Processing MPA {0} {1}'.format(mpa, prefix)
 
-            path = '../../MAPSA_Software/plots19_cable_rutgers'
-            scurve = SCurve('{0}/backup_{1}Calibration__MPA{2}.root'
+            path = '../MAPSA_Software/plots23_calibtest'
+            scurve = SCurve('{}/backup_{}Calibration__MPA{}.root'
                             .format(path, prefix, mpa))
-            output = 'output27_cable_rutgers_03'
-            name = '{0}_{1}'.format(mpa, prefix)
+            output = 'output29_calibtest'
+            name = '{}_{}'.format(mpa, prefix)
 
             scurve.set_directory('{0}/{1}'.format(output, name))
             scurve.set_rootfile('{0}/out.root'.format(output, name))
